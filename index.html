@@ -20,9 +20,8 @@ body {
 .container {
   text-align: center;
   background: rgba(0,0,0,0.3);
-  padding: 40px;
+  padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 0 30px rgba(255,255,255,0.3);
   z-index: 10;
 }
 
@@ -43,112 +42,134 @@ button {
   border-radius: 12px;
   margin: 10px;
   cursor: pointer;
-  transition: transform 0.2s;
-}
-
-button:hover {
-  transform: scale(1.1);
 }
 
 #yes {
   background: #ff4d6d;
-  color: white;
 }
 
 #no {
   background: gray;
-  color: white;
   position: relative;
 }
 
-/* hearts */
 .heart {
   position: absolute;
-  color: pink;
   font-size: 20px;
-  animation: float 6s linear infinite;
+  animation: float 5s linear infinite;
 }
 
 @keyframes float {
-  from {
-    transform: translateY(100vh);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-10vh);
-    opacity: 0;
-  }
+  from { transform: translateY(100vh); opacity: 1;}
+  to { transform: translateY(-10vh); opacity: 0;}
 }
 
-#final {
-  font-size: 28px;
+#photo {
+  display: none;
   margin-top: 20px;
-  color: #fff;
 }
+
+#photo img {
+  width: 250px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px white;
+}
+
+#finalText {
+  font-size: 30px;
+  margin-top: 15px;
+  display: none;
+  animation: glow 1s infinite alternate;
+}
+
+.firework {
+  position: absolute;
+  font-size: 30px;
+  animation: explode 1s ease-out infinite;
+}
+
+@keyframes explode {
+  0% { transform: scale(0);}
+  50% { transform: scale(2);}
+  100% { transform: scale(0);}
+}
+
 </style>
 </head>
 
 <body>
 
 <audio id="music" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
 </audio>
 
 <div class="container">
-  <h1 class="glow">Melisa ❤️</h1>
 
-  <p>
-  You make my heart smile in ways I never knew possible 😊<br><br>
-  You are beautiful.<br>
-  You are special.<br>
-  And you make my world brighter every day ✨
-  </p>
+<h1 class="glow">Melisa ❤️</h1>
 
-  <h2>Melisa, will you be my Valentine? 🌹</h2>
+<p>
+You make my world brighter ✨<br>
+You make my heart happier 😊<br><br>
+Melisa, will you be my Valentine?
+</p>
 
-  <button id="yes" onclick="yesClicked()">YES ❤️</button>
-  <button id="no" onmouseover="moveNo()">No 😢</button>
+<button id="yes" onclick="yesClicked()">YES ❤️</button>
+<button id="no" onmouseover="moveNo()">No 😢</button>
 
-  <div id="final"></div>
+<div id="photo">
+<img src="photo.jpg">
+</div>
+
+<div id="finalText">
+Melisa ❤️ Arjun<br>
+Forever begins now 💍
+</div>
+
 </div>
 
 <script>
 
-// start music on first click anywhere
-document.body.addEventListener('click', function() {
-  document.getElementById('music').play();
-}, { once: true });
+document.body.addEventListener("click", function(){
+document.getElementById("music").play();
+},{once:true});
 
-function yesClicked() {
+function yesClicked(){
 
-  document.getElementById("final").innerHTML =
-  "You just made Arjun the happiest man alive ❤️💍";
+document.getElementById("photo").style.display="block";
+document.getElementById("finalText").style.display="block";
 
-  createHearts(50);
+createHearts(30);
+createFireworks();
+
 }
 
-function moveNo() {
-  var btn = document.getElementById("no");
-  btn.style.position = "absolute";
-  btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
-  btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+function moveNo(){
+let btn=document.getElementById("no");
+btn.style.position="absolute";
+btn.style.left=Math.random()*window.innerWidth+"px";
+btn.style.top=Math.random()*window.innerHeight+"px";
 }
 
-function createHearts(num) {
-  for (let i = 0; i < num; i++) {
-    let heart = document.createElement("div");
-    heart.innerHTML = "❤️";
-    heart.className = "heart";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-    document.body.appendChild(heart);
-  }
+function createHearts(num){
+for(let i=0;i<num;i++){
+let heart=document.createElement("div");
+heart.innerHTML="❤️";
+heart.className="heart";
+heart.style.left=Math.random()*100+"vw";
+document.body.appendChild(heart);
+}
 }
 
-// floating hearts continuously
-setInterval(() => {
-  createHearts(1);
-}, 300);
+function createFireworks(){
+setInterval(()=>{
+let fire=document.createElement("div");
+fire.innerHTML="🎆";
+fire.className="firework";
+fire.style.left=Math.random()*100+"vw";
+fire.style.top=Math.random()*100+"vh";
+document.body.appendChild(fire);
+},300);
+}
 
 </script>
 
