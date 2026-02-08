@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Melisa ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+}
+
+.container {
+  text-align: center;
+  background: rgba(0,0,0,0.3);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(255,255,255,0.3);
+  z-index: 10;
+}
+
+.glow {
+  font-size: 2.5em;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px white; }
+  to { text-shadow: 0 0 30px pink, 0 0 40px red; }
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 12px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#no {
+  background: gray;
+  color: white;
+  position: relative;
+}
+
+/* hearts */
+.heart {
+  position: absolute;
+  color: pink;
+  font-size: 20px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(100vh);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
+}
+
+#final {
+  font-size: 28px;
+  margin-top: 20px;
+  color: #fff;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+  <h1 class="glow">Melisa ❤️</h1>
+
+  <p>
+  You make my heart smile in ways I never knew possible 😊<br><br>
+  You are beautiful.<br>
+  You are special.<br>
+  And you make my world brighter every day ✨
+  </p>
+
+  <h2>Melisa, will you be my Valentine? 🌹</h2>
+
+  <button id="yes" onclick="yesClicked()">YES ❤️</button>
+  <button id="no" onmouseover="moveNo()">No 😢</button>
+
+  <div id="final"></div>
+</div>
+
+<script>
+
+// start music on first click anywhere
+document.body.addEventListener('click', function() {
+  document.getElementById('music').play();
+}, { once: true });
+
+function yesClicked() {
+
+  document.getElementById("final").innerHTML =
+  "You just made Arjun the happiest man alive ❤️💍";
+
+  createHearts(50);
+}
+
+function moveNo() {
+  var btn = document.getElementById("no");
+  btn.style.position = "absolute";
+  btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+  btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+}
+
+function createHearts(num) {
+  for (let i = 0; i < num; i++) {
+    let heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(heart);
+  }
+}
+
+// floating hearts continuously
+setInterval(() => {
+  createHearts(1);
+}, 300);
+
+</script>
+
+</body>
+</html>
